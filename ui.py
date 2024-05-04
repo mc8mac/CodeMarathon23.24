@@ -91,7 +91,7 @@ def add_ride(user):
     origin = input("Enter the origin: ")
     destination = input("Enter the destination: ")
     date_time = input("Enter the date and time (YYYY-MM-DD HH:MM): ")
-    db.ride_db.add_ride(user, origin, destination, date_time, db.car_db.get_car_by_id(user.istid).license_plate)
+    db.ride_db.add_ride(user, origin, destination, date_time, db.car_db.get_car_by_id(user.istid))
     return
 
 def view_rides(user, previous=False):
@@ -109,6 +109,7 @@ def view_rides(user, previous=False):
     return
 
 def app(user):
+    
     if db.car_db.get_car_by_id(user.istid):
         while True:
             print("1 -> Schedule a ride")

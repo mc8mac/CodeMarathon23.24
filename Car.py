@@ -25,7 +25,7 @@ class CarDB:
 
     def add_car(self, car):
         self.cars.append(car)
-        with open('carsdb.csv', 'a') as file:
+        with open('carsdb.csv', 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow([car.istid, car.brand, car.model, car.license_plate, car.color, car.seats])
         print(f"Car added: {car}")

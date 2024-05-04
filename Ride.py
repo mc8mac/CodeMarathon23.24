@@ -9,6 +9,7 @@ class Ride:
         self.destination = destination
         self.date_time = date_time
         self.car = car.license_plate
+        self.seats = car.seats
         self.passengers = passengers
         self.stops = stops
 
@@ -50,7 +51,7 @@ class Ride:
             writer.writerows(data)
 
     def __str__(self):
-        return f"{self.origin} -> {self.destination} ({self.date_time}), Driver: {self.driver}, Car: {self.car}, Stops: {self.stops}, Seats Left: {int(self.car.seats) - len(self.passengers)}"
+        return f"{self.origin} -> {self.destination} ({self.date_time}), Driver: {self.driver}, Car: {self.car}, Stops: {self.stops}, Seats Left: {int(self.seats) - len(self.passengers)}"
 
 class RideDB:
         
@@ -60,14 +61,14 @@ class RideDB:
                 reader = csv.reader(file)
                 next(reader)
                 for row in reader:
-                    ride_id, driver, origin, destination, date_time, car, passengers, stops = row
-                    self.rides.append(Ride(driver, origin, destination, date_time, car, ride_id, passengers, stops))
+                    ride_id, driver, origin, destination, date_time, car, seats, passengers, stops = row
+                    self.rides.append(Ride(driver, origin, destination, date_time, car, seats , ride_id, passengers, stops))
         
         def add_ride(self, driver, origin, destination, date_time, car):
             ride_id = len(self.rides) + 1
             ride = Ride(driver, origin, destination, date_time, car, ride_id)
             self.rides.append(ride)
-            with open('ridedb.csv', 'a') as file:
+            with open('ridedb.csv', 'a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow([ride_id, driver, origin, destination, date_time, car, '', ''])
             print(f"Ride added: {ride}")
