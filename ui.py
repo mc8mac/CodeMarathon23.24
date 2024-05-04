@@ -2,6 +2,7 @@ from User import *
 import hashlib
 
 UserDB = UserDB()
+print(x.name for x in UserDB.users)
 
 def main():
     while True:
@@ -57,6 +58,7 @@ def login():
         return
     
     user = UserDB.find_user(istid)
+    print(user.istid)
     if not user:
         print("User not found. Please try again.\n")
         login()

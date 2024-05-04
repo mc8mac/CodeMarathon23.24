@@ -76,6 +76,7 @@ class UserDB:
             for row in reader:
                 name, istid, password = row
                 self.users.append(User(istid, name, password))
+                
 
     def add_user(self, user):
         """
@@ -98,6 +99,6 @@ class UserDB:
         Finds a user in the database by their ISTID.
         """
         for user in self.users:
-            if user.istid == istid:
+            if str(user.istid) == str(istid):
                 return user
         return None
