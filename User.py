@@ -22,7 +22,7 @@ class User:
         """
         String representation of the User object.
         """
-        return f"User: {self.name}, ISTid: {self.istid}"
+        return f"User: {self.name}, ISTID: {self.istid}"
 
 
 class Driver(User):
@@ -52,14 +52,40 @@ class Driver(User):
 
 
 class Vehicle:
-    def __init__(self, brand, model, year, color):
+    def __init__(self, brand, model, year):
         self.brand = brand
         self.model = model
         self.year = year
-        self.color = color
 
     def __str__(self):
         """
         String representation of the Vehicle object.
         """
-        return f"{self.brand} {self.model} {self.color} ({self.year})"
+        return f"{self.brand} {self.model} ({self.year})"
+
+
+class UserDB():
+    def __init__(self):
+        self.users = []
+
+    def add_user(self, user):
+        """
+        Adds a user to the database.
+        """
+        self.users.append(user)
+        print(f"User added: {user}")
+
+    def get_users(self):
+        """
+        Returns the list of users in the database.
+        """
+        return self.users
+    
+    def find_user(self, istid):
+        """
+        Finds a user in the database by their ISTID.
+        """
+        for user in self.users:
+            if user.istid == istid:
+                return user
+        return None
