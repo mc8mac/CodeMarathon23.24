@@ -1,10 +1,10 @@
-from User import *
-from Car import *
+from DB import DB
+from User import User
+from Car import Car
+from Ride import Ride
 import hashlib
 
-UserDB = UserDB()
-CarDB = CarDB()
-print(x.name for x in UserDB.users)
+db = DB()
 
 def main():
     while True:
@@ -39,7 +39,7 @@ def create_account():
         create_account()
         return
 
-    if UserDB.find_user(istid):
+    if db.user_db.find_user(istid):
         print("User already exists. Please try again.\n")
         create_account()
         return
@@ -53,9 +53,9 @@ def create_account():
         color = input("Enter your car color: ")
         seats = input("Enter your car seats: ")
         car = Car(brand, model, license_plate, color, seats, istid)
-        CarDB.add_car(car)
+        db.car_db.add_car(car)
         
-    UserDB.add_user(user)
+    db.user_db.add_user(user)
     print("Account created successfully!\n")
     return
 
@@ -69,7 +69,7 @@ def login():
         login()
         return
     
-    user = UserDB.find_user(istid)
+    user = db.user_db.find_user(istid)
     
     if not user:
         print("User not found. Please try again.\n")
@@ -85,7 +85,7 @@ def login():
     return user
 
 def app(user):
-    if CarDB.isDriver(user.istid):
+    if db.car_db.isDriver(user.istid):
         while True:
             print("1 -> Schedule a ride")
             print("2 -> View Driver Reviews")
@@ -93,13 +93,13 @@ def app(user):
             print("q -> Logout")
             choice = input()
             if choice == "1":
-                Schedule_ride()
+                db.schedule_ride(user)
                 continue
             elif choice == "2":
-                view_rides()
+                db.view_rides(user)
                 continue
             elif choice == "3":
-                add_review()
+                db.add_review(user)
                 continue
             elif choice == "q":
                 break
@@ -113,13 +113,13 @@ def app(user):
         print("q -> Exit")
         choice = input()
         if choice == "1":
-            add_ride()
+            db.add_ride(user)
             continue
         elif choice == "2":
-            view_rides()
+            db.view_rides(user)
             continue
         elif choice == "3":
-            add_review()
+            db.add_review(user)
             continue
         elif choice == "q":
             break
