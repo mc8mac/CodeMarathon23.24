@@ -8,7 +8,7 @@ class Ride:
         self.origin = origin
         self.destination = destination
         self.date_time = date_time
-        self.car = car
+        self.car = car.license_plate
         self.passengers = passengers
         self.stops = stops
 
