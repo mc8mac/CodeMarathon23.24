@@ -1,7 +1,9 @@
 from User import *
+from Car import *
 import hashlib
 
 UserDB = UserDB()
+CarDB = CarDB()
 print(x.name for x in UserDB.users)
 
 def main():
@@ -15,8 +17,9 @@ def main():
             create_account()
             continue
         elif choice == "2":
-            if login():
-                app()
+            user = login()
+            if user:
+                app(user)
             continue
         elif choice == "q":
             break
@@ -28,6 +31,7 @@ def create_account():
     name = input("Enter your name: ")
     istid = input("Enter your ISTID: ")
     password = input("Enter your password: ")
+    isDriver = input("Registering as a Driver? (y/n): ")
     print()
     
     if not name or not istid or not password:
@@ -41,6 +45,16 @@ def create_account():
         return
     
     user = User(istid, name, hashlib.sha256(password.encode()).hexdigest())
+    
+    if isDriver == "y":
+        brand = input("Enter your car brand: ")
+        model = input("Enter your car model: ")
+        license_plate = input("Enter your car license plate: ")
+        color = input("Enter your car color: ")
+        seats = input("Enter your car seats: ")
+        car = Car(brand, model, license_plate, color, seats, istid)
+        CarDB.add_car(car)
+        
     UserDB.add_user(user)
     print("Account created successfully!\n")
     return
@@ -56,7 +70,7 @@ def login():
         return
     
     user = UserDB.find_user(istid)
-    print(user.istid)
+    
     if not user:
         print("User not found. Please try again.\n")
         login()
@@ -68,9 +82,30 @@ def login():
         return
     
     print(f"Welcome, {user.name}!\n")
-    return
+    return user
 
-def app():
+def app(user):
+    if CarDB.isDriver(user.istid):
+        while True:
+            print("1 -> Schedule a ride")
+            print("2 -> View Driver Reviews")
+            print("3 -> View Reviews")
+            print("q -> Logout")
+            choice = input()
+            if choice == "1":
+                Schedule_ride()
+                continue
+            elif choice == "2":
+                view_rides()
+                continue
+            elif choice == "3":
+                add_review()
+                continue
+            elif choice == "q":
+                break
+            else:
+                print("Invalid choice. Please try again.\n")
+    
     while True:
         print("1 -> Add a ride")
         print("2 -> View rides")
