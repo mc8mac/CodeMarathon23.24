@@ -21,7 +21,7 @@ class CarDB:
             next(reader)
             for row in reader:
                 istid, brand, model, license_plate, color, seats = row
-                self.users.append(Car(brand, model, license_plate, color, seats, istid))
+                self.cars.append(Car(brand, model, license_plate, color, seats, istid))
 
     def add_car(self, car):
         self.cars.append(car)
