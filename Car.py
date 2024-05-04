@@ -25,10 +25,6 @@ class CarDB:
 
     def add_car(self, car):
         self.cars.append(car)
-        with open('carsdb.csv', 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([car.istid, car.brand, car.model, car.license_plate, car.color, car.seats])
-        print(f"Car added: {car}")
 
     def get_cars(self):
         return self.cars
@@ -44,3 +40,10 @@ class CarDB:
             if car.license_plate == license_plate:
                 return car
         return None
+
+    def save(self):
+        with open('carsdb.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['istid', 'brand', 'model', 'license_plate', 'color', 'seats'])
+            for car in self.cars:
+                writer.writerow([car.istid, car.brand, car.model, car.license_plate, car.color, car.seats])

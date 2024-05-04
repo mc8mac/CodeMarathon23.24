@@ -22,9 +22,10 @@ def main():
             user = login()
             if user:
                 app(user)
+                return
             continue
         elif choice == "q":
-            break
+            return
         else:
             print("Invalid choice. Please try again.\n")
             
@@ -95,18 +96,40 @@ def add_ride(user):
     return
 
 def view_rides(user, previous=False):
-    rides = db.ride_db.get_rides_by_driver(user.istid)
+    rides = db.ride_db.get_rides_by_driver(user)
 
     if previous:
-        rides = [ride for ride in rides if ride.date_time < dt.now()]
+        rides = [ride for ride in rides if dt.strptime(ride.date_time, '%Y-%m-%d %H:%M') < dt.now()]
     else:
-        rides = [ride for ride in rides if ride.date_time > dt.now()]
+        rides = [ride for ride in rides if dt.strptime(ride.date_time, '%Y-%m-%d %H:%M') > dt.now()]
     
     for ride in rides:
         print(ride)
 
     print()
     return
+
+def search_rides(user):
+    origin = input("Enter the origin: ")
+    destination = input("Enter the destination: ")
+    date_time = input("Enter the date and time (YYYY-MM-DD HH:MM): ")
+    rides = db.ride_db.get_rides(origin, destination, date_time)
+    rides = [print(ride) for ride in rides if dt.strptime(ride.date_time, '%Y-%m-%d %H:%M') > dt.now()]
+
+def view_my_rides(user):
+    rides = db.ride_db.get_rides_by_passenger(user.istid)
+    for ride in rides:
+        print(ride)
+    print()
+
+def add_review(user):
+    ride_id = input("Enter the ride ID: ")
+    rating = input("Enter your rating (1-5): ")
+    comment = input("Enter your comment: ")
+    review = Review(user.istid, ride_id, rating, comment)
+    db.review_db.add_review(review)
+    print("Review added successfully!\n")
+
 
 def app(user):
     
@@ -144,27 +167,31 @@ def app(user):
             
             elif choice == "q": # Quit
                 main()
+                return
             else:
                 print("Invalid choice. Please try again.\n")
     
-    while True:
-        print("1 -> Add a ride")
-        print("2 -> View rides")
-        print("3 -> View reviews")
-        print("q -> Exit")
-        choice = input()
-        if choice == "1":
-            db.add_ride(user)
-            continue
-        elif choice == "2":
-            db.view_rides(user)
-            continue
-        elif choice == "3":
-            db.add_review(user)
-            continue
-        elif choice == "q":
-            break
-        else:
-            print("Invalid choice. Please try again.\n")
+    else:
+        while True:
+            print("1 -> Search rides")
+            print("2 -> View my rides")
+            print("3 -> View my reviews")
+            print("4 -> Leave a review")
+            print("q -> Exit")
+            choice = input()
+            if choice == "1":
+                search_rides(user)
+            elif choice == "2":
+                view_my_rides(user)
+            elif choice == "3":
+                db.review_db.view_user_reviews(user)
+            elif choice == "4":
+                add_review(user)
+            elif choice == "q":
+                break
+            else:
+                print("Invalid choice. Please try again.\n")
+
 
 main()
+db.save()

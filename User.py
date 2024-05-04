@@ -28,10 +28,7 @@ class UserDB:
         """
         Adds a user to the database.
         """
-        with open('userdb.csv', 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([user.name, user.istid, user.password])
-        
+        self.users.append(user)
         print(f"User added: {user}")
 
     def get_users(self):
@@ -39,6 +36,13 @@ class UserDB:
         Returns the list of users in the database.
         """
         return self.users
+
+    def save(self):
+        with open('userdb.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['name', 'istid', 'password'])
+            for user in self.users:
+                writer.writerow([user.name, user.istid, user.password])
     
     def find_user(self, istid):
         """

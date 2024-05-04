@@ -1,3 +1,7 @@
+istid,brand,model,license_plate,color,seats
 100000,Subaru,Imprenza,12-AB-34,Blue,4
 106082,Volkswagen,Polo,AB-00-CC,white,5
 106011,Mitshubishi,Civic,PO-EA-01,Red,3
+105982,Honda,Civic,11-AA-BB,White,4
+105111,Subaru,Aztec,MY-12-DA,Black,7
+admin,admin,admin,admin,admin,admin

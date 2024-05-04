@@ -1,1 +1,6 @@
-1, 100000, TagusPark, Paço de Arcos, 2024-05-04 19:00:00, 12-AB-34,4,"", ""
+ride_id,driver,origin,destination,date_time,car,seats,passengers,stops
+1,105982,y,n,2000-02-03 04:15,11-AA-BB,4,,
+2,105982,yes,no,1983-12-23 04:15,11-AA-BB,4,,
+3,105982,yes,no,2003-09-30 09:23,11-AA-BB,4,,
+4,105982,portugal,espanha,2030-12-12 04:11,11-AA-BB,4,,
+5,105111,Portugal,Espanha,2032-12-09 12:33,MY-12-DA,7,,

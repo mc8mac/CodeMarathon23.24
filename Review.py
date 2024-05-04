@@ -1,5 +1,5 @@
 import csv
-from Ride import get_rides_by_driver
+from Ride import *
 
 class Review:
     def __init__(self, user, rideid, rating, comment):

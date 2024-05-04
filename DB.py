@@ -8,3 +8,8 @@ class DB:
         self.car_db = CarDB()
         self.user_db = UserDB()
         self.ride_db = RideDB()
+
+    def save(self):
+        self.car_db.save()
+        self.user_db.save()
+        self.ride_db.save()
