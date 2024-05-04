@@ -32,7 +32,7 @@ class CarDB:
     def get_cars(self):
         return self.cars
     
-    def isDriver(self, istid):
+    def get_car_by_id(self, istid):
         for car in self.cars:
             if car.istid == istid:
                 return car

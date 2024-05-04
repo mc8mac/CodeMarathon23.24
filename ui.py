@@ -85,21 +85,25 @@ def login():
     return user
 
 def app(user):
-    if db.car_db.isDriver(user.istid):
+    if db.car_db.get_car_by_id(user.istid):
         while True:
             print("1 -> Schedule a ride")
-            print("2 -> View Driver Reviews")
-            print("3 -> View Reviews")
+            print("2 -> View rides")
+            print("3 -> View Driver Reviews")
+            print("4 -> View Reviews")
             print("q -> Logout")
             choice = input()
             if choice == "1":
-                db.schedule_ride(user)
+                db.ride_db.schedule_ride(user, db.car_db.get_car_by_id(user.istid))
                 continue
             elif choice == "2":
-                db.view_rides(user)
+                db.ride_db.view_rides(user)
                 continue
             elif choice == "3":
-                db.add_review(user)
+                db.review_db.view_driver_reviews(user)
+                continue
+            elif choice == "4":
+                db.review_db.view_user_reviews(user)
                 continue
             elif choice == "q":
                 main()
