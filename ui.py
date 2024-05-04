@@ -102,7 +102,7 @@ def app(user):
                 db.add_review(user)
                 continue
             elif choice == "q":
-                break
+                main()
             else:
                 print("Invalid choice. Please try again.\n")
     
