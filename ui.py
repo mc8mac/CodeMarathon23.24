@@ -12,19 +12,17 @@ def main():
         print("q -> Exit")
         choice = input()
         if choice == "1":
-            
             create_account()
-            login()
-            break
-            
+            continue
         elif choice == "2":
-            login()
-            break
-            
+            if login():
+                app()
+            continue
         elif choice == "q":
             break
         else:
             print("Invalid choice. Please try again.\n")
+            
             
 def create_account():
     name = input("Enter your name: ")
@@ -71,5 +69,26 @@ def login():
     
     print(f"Welcome, {user.name}!\n")
     return
+
+def app():
+    while True:
+        print("1 -> Add a ride")
+        print("2 -> View rides")
+        print("3 -> View reviews")
+        print("q -> Exit")
+        choice = input()
+        if choice == "1":
+            add_ride()
+            continue
+        elif choice == "2":
+            view_rides()
+            continue
+        elif choice == "3":
+            add_review()
+            continue
+        elif choice == "q":
+            break
+        else:
+            print("Invalid choice. Please try again.\n")
 
 main()
