@@ -22,7 +22,7 @@ class User:
         """
         String representation of the User object.
         """
-        return f"User: {self.name}, ISTID: {self.istid}"
+        return f"User: {self.name}, ISTid: {self.istid}"
 
 
 class Driver(User):
@@ -52,13 +52,14 @@ class Driver(User):
 
 
 class Vehicle:
-    def __init__(self, brand, model, year):
+    def __init__(self, brand, model, year, color):
         self.brand = brand
         self.model = model
         self.year = year
+        self.color = color
 
     def __str__(self):
         """
         String representation of the Vehicle object.
         """
-        return f"{self.brand} {self.model} ({self.year})"
+        return f"{self.brand} {self.model} {self.color} ({self.year})"
