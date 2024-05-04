@@ -11,3 +11,11 @@ Vehicle Registration: Drivers can register their vehicles, providing relevant de
 Rides: Drivers can announce ride offers, detailing origin, destination, date, time and car specifications. Passengers can search for and book rides that match their schedules and routes.
 
 Review System: Users can later review their experiences, fostering trust within the system.
+
+HOW TO RUN:
+
+Download all documentation from: https://github.com/mc8mac/CodeMarathon23.24
+
+Execute the file ui.py using python 3
+
+Thank you for using our program.
