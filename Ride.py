@@ -17,7 +17,7 @@ class Ride:
         print(f"Passenger added: {user.istid}")
 
         # Read the entire file into memory
-        with open('ridesdb.csv', 'r') as file:
+        with open('ridedb.csv', 'r') as file:
             data = list(csv.reader(file))
 
         # Update the relevant row
@@ -26,7 +26,7 @@ class Ride:
                 row[6] = ', '.join(self.passengers)
 
         # Write the data back to the file
-        with open('ridesdb.csv', 'w', newline='') as file:
+        with open('ridedb.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerows(data)
         
@@ -36,7 +36,7 @@ class Ride:
         print(f"Stop added: {stop}")
 
         # Read the entire file into memory
-        with open('ridesdb.csv', 'r') as file:
+        with open('ridedb.csv', 'r') as file:
             data = list(csv.reader(file))
 
         # Update the relevant row
@@ -45,7 +45,7 @@ class Ride:
                 row[7] = ', '.join(self.stops)
 
         # Write the data back to the file
-        with open('ridesdb.csv', 'w', newline='') as file:
+        with open('ridedb.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerows(data)
 
@@ -54,7 +54,7 @@ class Ride:
 
 class RideDB:
         
-        def __init__(self, filename='ridesdb.csv'):
+        def __init__(self, filename='ridedb.csv'):
             self.rides = []
             with open(filename, 'r') as file:
                 reader = csv.reader(file)
@@ -67,7 +67,7 @@ class RideDB:
             ride_id = len(self.rides) + 1
             ride = Ride(driver, origin, destination, date_time, car, ride_id)
             self.rides.append(ride)
-            with open('ridesdb.csv', 'a') as file:
+            with open('ridedb.csv', 'a') as file:
                 writer = csv.writer(file)
                 writer.writerow([ride_id, driver, origin, destination, date_time, car, '', ''])
             print(f"Ride added: {ride}")

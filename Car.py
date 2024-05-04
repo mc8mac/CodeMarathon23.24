@@ -7,6 +7,7 @@ class Car():
         self.license_plate = license_plate
         self.color = color
         self.seats = seats
+        self.istid = istid
     
     def __str__(self):
         return f"{self.color} {self.brand} {self.model} [{self.license_plate}] with {self.seats} seats"
